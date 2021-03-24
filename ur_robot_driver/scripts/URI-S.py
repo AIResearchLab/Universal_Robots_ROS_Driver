@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import rospy
 import time
-from control_msgs.msg import JointTrajectoryControllerState
+from sensor_msgs.msg import JointState
 
 def callback(data):
      rospy.loginfo(data)
@@ -9,7 +9,7 @@ def callback(data):
 def listener():
 
     rospy.init_node('uris', anonymous=True)
-    rospy.Subscriber("arm_controller/state", JointTrajectoryControllerState, callback)
+    rospy.Subscriber("joint_states", JointState, callback)
     rospy.spin()
 if __name__ == '__main__':
     listener()

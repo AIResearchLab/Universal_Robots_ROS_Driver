@@ -20,7 +20,12 @@ def talker():
     pub = rospy.Publisher('/joint_group_position_controller/command', Float64MultiArray, queue_size=10)
     rospy.init_node('urcom', anonymous=True)
     rate = rospy.Rate(50)
-    Waypoints = [[0.00, 0.00, 0.00, 0.00, 0.00, 0.00],[0.00, -1.00, 1.00, 0.00, 1.57, 0.00],[0.00, -1.00, 1.00, 0.00, 3.14, 0.00],[0.00, 0.00, 0.00, 0.00, 0.00, 0.00]]
+    homepos = Float64MultiArray(data=[0.00, 0.00, 0.00, 0.00, 0.00, 0.00])
+    pub.publish(homepos)
+    addway = [[0.00, -1.00, 1.00, 1.00, 1.57, 1.00],[0.00, -1.00, 1.00, 0.00, 3.14, 0.00],[0.00, 0.00, 0.00, 0.00, 0.00, 0.00]]
+    Waypoints = []
+    Waypoints = Waypoints+addway
+    print("Available Waypoints: ", Waypoints)
     wpn = len(Waypoints)
     wpc = 0
     while not rospy.is_shutdown():

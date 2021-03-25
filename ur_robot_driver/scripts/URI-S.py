@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import rospy
 import time
+import numpy
 from sensor_msgs.msg import JointState
 
 def callback(data):
-     rospy.loginfo(data)
+     print(numpy.around(data.position,3))
      
 def listener():
 
